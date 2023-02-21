@@ -25,12 +25,12 @@ interface GitHubUser {
   type: string
   site_admin: boolean
   name: string
-  company: string | null
+  company: string | undefined
   blog: string
   location: string | null
   email: string | null
   hireable: boolean | null
-  bio: string | null
+  bio: string | undefined
   twitter_username: string | null
   public_repos: number
   public_gists: number
@@ -47,6 +47,9 @@ export interface Issue {
   user: {
     login: string
     id: number
+    company: string | undefined
+    followers: number
+    html_url: string
   }
   state: 'open' | 'closed'
   locked: boolean
@@ -114,7 +117,7 @@ export function Home() {
         followers={followers}
         company={company}
         img_Url={avatar_url}
-        description={bio}
+        description={bio || ''}
         gitHubLink={html_url}
       />
       <SearchBar listLength={issuesData.total_count} doNewQuery={doNewQuery} />
